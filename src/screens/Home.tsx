@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 
 import Card from '../components/Card';
-
-const pokemonsData = ['', '', '', '', '', '', '', '', ''];
+import useFetch from '../hooks/useFetch';
 
 const Home: React.FC = (): React.JSX.Element => {
+  const {data: pokemons, isLoading: loadingPokemons} =
+    useFetch<any>('/pokemon');
+
   return (
     <ScrollView>
       <View className="py-8 items-center">
@@ -15,9 +17,15 @@ const Home: React.FC = (): React.JSX.Element => {
       </View>
 
       <View className="px-5">
-        {pokemonsData.map((pokemon, index: number) => (
-          <Card key={index} />
-        ))}
+        {loadingPokemons ? (
+          <View>
+            <Text>Cargando..</Text>
+          </View>
+        ) : (
+          pokemons?.results?.map((pokemon: any, index: number) => (
+            <Card key={index} pokemon={pokemon} />
+          ))
+        )}
       </View>
     </ScrollView>
   );
