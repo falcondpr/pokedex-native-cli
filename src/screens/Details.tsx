@@ -2,8 +2,24 @@ import React from 'react';
 import {Text as TextNative, Image, View, ScrollView} from 'react-native';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
+import useFetch from '../hooks/useFetch';
 
-const Details: React.FC = (): React.JSX.Element => {
+const Details: React.FC<any> = ({route}): React.JSX.Element => {
+  const {data: pokemonInfo, isLoading: loadingPokemonInfo} = useFetch(
+    `/pokemon/${route.params.pokemonName}`,
+    route.pokemonName,
+  );
+
+  console.log(pokemonInfo);
+
+  if (loadingPokemonInfo) {
+    return (
+      <View>
+        <Text>Cargando..</Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView className="p-5">
       <View>

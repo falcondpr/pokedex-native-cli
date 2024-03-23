@@ -5,10 +5,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-// icon
-import AntDesign from 'react-native-vector-icons/AntDesign';
-AntDesign.loadFont();
-
 // screens
 import Home from './screens/Home';
 import Search from './screens/Search';

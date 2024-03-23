@@ -1,13 +1,27 @@
 import React from 'react';
-import {View, TextInput, Text, ScrollView} from 'react-native';
 import useSWR from 'swr';
-import {SvgUri} from 'react-native-svg';
+import {View, TextInput, Text, ScrollView} from 'react-native';
 import {useForm, Controller, FieldValues} from 'react-hook-form';
+import {SvgUri} from 'react-native-svg';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import Card from '../components/Card';
+import {IPokemonResponse} from '../interfaces/pokemon';
 
-const Details: React.FC = (): React.JSX.Element => {
-  const {data: pokemons} = useSWR<any>('/pokemon');
+export type RootStackParamList = {
+  Home: undefined;
+  Details: undefined;
+};
+
+type DetailsScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Details'
+>;
+
+const Details: React.FC<{navigation: DetailsScreenNavigationProp}> = ({
+  navigation,
+}): React.JSX.Element => {
+  const {data: pokemons} = useSWR<IPokemonResponse>('/pokemon');
 
   const {control, watch} = useForm<FieldValues>({
     defaultValues: {
@@ -18,7 +32,7 @@ const Details: React.FC = (): React.JSX.Element => {
 
   const pokemonsFiltered = !name
     ? []
-    : pokemons?.results?.filter((pokemon: any) =>
+    : pokemons?.results?.filter(pokemon =>
         pokemon?.name?.toLowerCase()?.includes(name?.toLowerCase()),
       );
 
@@ -58,16 +72,26 @@ const Details: React.FC = (): React.JSX.Element => {
       </View>
 
       <View>
-        {pokemonsFiltered?.length === 0 && !name ? (
+        {pokemonsFiltered?.length === 0 && name ? (
           <View className="mt-4">
-            <Text className="text-xl font-[Lexend-Regular] text-neutral-400">
+            <Text className="text-lg">
+              No hay resultados con esas coincidencias
+            </Text>
+          </View>
+        ) : pokemonsFiltered?.length === 0 && !name ? (
+          <View className="mt-4">
+            <Text className="text-lg font-[Lexend-Regular] text-neutral-400">
               Busca un pokemon para tener mas informacion del mismo
             </Text>
           </View>
         ) : (
           <View className="mt-8">
-            {pokemonsFiltered?.map((pokemon: any, index: number) => (
-              <Card key={index} pokemon={pokemon} />
+            {pokemonsFiltered?.map(pokemon => (
+              <Card
+                navigation={navigation}
+                key={pokemon.name}
+                pokemon={pokemon}
+              />
             ))}
           </View>
         )}

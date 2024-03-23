@@ -3,11 +3,18 @@ import {TouchableOpacity, View} from 'react-native';
 import {SvgUri} from 'react-native-svg';
 
 import Text from '../ui/Text';
+import {RootStackParamList} from '../screens/Home';
+import {IRoute, TabBarProps} from '../interfaces/tabBar';
 
-const TabBar: React.FC<any> = ({state, navigation}): React.JSX.Element => {
+const TabBar: React.FC<TabBarProps> = ({
+  state,
+  navigation,
+}): React.JSX.Element => {
   return (
     <View className="flex-row justify-center gap-x-20 h-[75px] items-center px-5">
-      {state.routes.map((route: any, index: number) => {
+      {state.routes.map((route: IRoute, index: number) => {
+        console.log(route);
+
         const isFocused = state.index === index;
         const label = route.name === 'HomeStack' ? 'Inicio' : 'Buscar';
 
@@ -27,8 +34,8 @@ const TabBar: React.FC<any> = ({state, navigation}): React.JSX.Element => {
             canPreventDefault: true,
           });
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+          if (!isFocused && event !== false) {
+            navigation.navigate(route.name as keyof RootStackParamList);
           }
         };
 
