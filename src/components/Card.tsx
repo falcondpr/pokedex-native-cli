@@ -5,7 +5,7 @@ import Text from '../ui/Text';
 import Heading from '../ui/Heading';
 import useFetch from '../hooks/useFetch';
 
-const Card: React.FC<any> = ({pokemon}): React.JSX.Element => {
+const Card: React.FC<any> = ({navigation, pokemon}): React.JSX.Element => {
   const {data: pokemonInfo, isLoading: loadingPokemon} = useFetch<any>(
     `/pokemon/${pokemon.name}`,
     pokemon.name,
@@ -20,7 +20,9 @@ const Card: React.FC<any> = ({pokemon}): React.JSX.Element => {
   }
 
   return (
-    <TouchableOpacity className="flex-row mb-6">
+    <TouchableOpacity
+      className="flex-row mb-6"
+      onPress={() => navigation.navigate('Details')}>
       <View className="flex-1">
         <View>
           {pokemonInfo?.abilities?.map(({ability}: any) => (

@@ -4,7 +4,7 @@ import {View, Text, ScrollView} from 'react-native';
 import Card from '../components/Card';
 import useFetch from '../hooks/useFetch';
 
-const Home: React.FC = (): React.JSX.Element => {
+const Home: React.FC<any> = ({navigation}): React.JSX.Element => {
   const {data: pokemons, isLoading: loadingPokemons} =
     useFetch<any>('/pokemon');
 
@@ -23,7 +23,7 @@ const Home: React.FC = (): React.JSX.Element => {
           </View>
         ) : (
           pokemons?.results?.map((pokemon: any, index: number) => (
-            <Card key={index} pokemon={pokemon} />
+            <Card key={index} navigation={navigation} pokemon={pokemon} />
           ))
         )}
       </View>
