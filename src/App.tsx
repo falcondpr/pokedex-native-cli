@@ -11,7 +11,7 @@ AntDesign.loadFont();
 
 // screens
 import Home from './screens/Home';
-import Details from './screens/Details';
+import Details from './screens/Search';
 import TabBar from './components/TabBar';
 
 const Stack = createNativeStackNavigator();
