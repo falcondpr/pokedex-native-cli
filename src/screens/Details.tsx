@@ -1,12 +1,19 @@
 import React from 'react';
-import {Text as TextNative, Image, View, ScrollView} from 'react-native';
+import {
+  Text as TextNative,
+  Image,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import {ArrowLeftIcon} from 'lucide-react-native';
 
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 import useFetch from '../hooks/useFetch';
 import {IPokemon} from '../interfaces/pokemon';
 
-const Details: React.FC<any> = ({route}): React.JSX.Element => {
+const Details: React.FC<any> = ({route, navigation}): React.JSX.Element => {
   const {data: pokemonInfo, isLoading: loadingPokemonInfo} = useFetch<IPokemon>(
     `/pokemon/${route.params.pokemonName}`,
     route.pokemonName,
@@ -22,6 +29,13 @@ const Details: React.FC<any> = ({route}): React.JSX.Element => {
 
   return (
     <ScrollView className="p-5">
+      <View className="mb-5">
+        <TouchableOpacity className="py-3" onPress={() => navigation.goBack()}>
+          <ArrowLeftIcon color="#999" size={32} />
+          {/* <Text>Volver</Text> */}
+        </TouchableOpacity>
+      </View>
+
       <View className="border border-neutral-300 rounded-xl">
         <Image
           source={{uri: pokemonInfo?.sprites?.front_default ?? ''}}

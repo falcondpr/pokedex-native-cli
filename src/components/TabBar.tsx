@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {SvgUri} from 'react-native-svg';
 
@@ -10,11 +10,23 @@ const TabBar: React.FC<TabBarProps> = ({
   state,
   navigation,
 }): React.JSX.Element => {
+  const [isPrincipalScreen, setIsPrincipalScreen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsPrincipalScreen(false);
+  }, []);
+
+  console.log(isPrincipalScreen);
+
   return (
     <View className="flex-row justify-center gap-x-20 h-[75px] items-center px-5">
       {state.routes.map((route: IRoute, index: number) => {
         const isFocused = state.index === index;
         const label = route.name === 'HomeStack' ? 'Inicio' : 'Buscar';
+
+        // route.name === 'HomeStack' || route.name === 'Search'
+        //   ? setIsPrincipalScreen(true)
+        //   : setIsPrincipalScreen(false);
 
         const svgUriIcon =
           route.name === 'HomeStack' && isFocused
@@ -33,7 +45,9 @@ const TabBar: React.FC<TabBarProps> = ({
           });
 
           if (!isFocused && event !== false) {
-            navigation.navigate(route.name as any);
+            // navigation.navigate(route.name as any);
+            navigation.navigate('HomeStack');
+            setIsPrincipalScreen(true);
           }
         };
 
@@ -44,9 +58,7 @@ const TabBar: React.FC<TabBarProps> = ({
             className="items-center">
             <SvgUri width={28} height={28} uri={svgUriIcon} />
             <View className="h-1" />
-            <Text
-              // size="small"
-              color={isFocused ? 'text-neutral-800' : 'text-neutral-400'}>
+            <Text color={isFocused ? 'text-neutral-800' : 'text-neutral-400'}>
               {label}
             </Text>
           </TouchableOpacity>
