@@ -1,16 +1,16 @@
 import React from 'react';
 import {Text as TextNative, Image, View, ScrollView} from 'react-native';
+
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 import useFetch from '../hooks/useFetch';
+import {IPokemon} from '../interfaces/pokemon';
 
 const Details: React.FC<any> = ({route}): React.JSX.Element => {
-  const {data: pokemonInfo, isLoading: loadingPokemonInfo} = useFetch(
+  const {data: pokemonInfo, isLoading: loadingPokemonInfo} = useFetch<IPokemon>(
     `/pokemon/${route.params.pokemonName}`,
     route.pokemonName,
   );
-
-  console.log(pokemonInfo);
 
   if (loadingPokemonInfo) {
     return (
@@ -22,31 +22,31 @@ const Details: React.FC<any> = ({route}): React.JSX.Element => {
 
   return (
     <ScrollView className="p-5">
-      <View>
+      <View className="border border-neutral-300 rounded-xl">
         <Image
-          source={require('../../assets/images/pokemon.jpg')}
+          source={{uri: pokemonInfo?.sprites?.front_default ?? ''}}
           className="w-full h-64 rounded-xl"
-          resizeMode="cover"
+          resizeMode="contain"
         />
       </View>
 
       <View className="mt-4">
-        <Heading>Nombre de pokemon</Heading>
+        <Heading>{pokemonInfo?.name}</Heading>
 
         <View className="flex-row justify-between">
           <View className="mt-2">
             <Text>Id:</Text>
-            <Text>#1</Text>
+            <Text>#{pokemonInfo?.id}</Text>
           </View>
 
           <View className="mt-2">
             <Text>Height:</Text>
-            <Text>7</Text>
+            <Text>{pokemonInfo?.height}</Text>
           </View>
 
           <View className="mt-2">
             <Text>Weight:</Text>
-            <Text>60</Text>
+            <Text>{pokemonInfo?.weight}</Text>
           </View>
         </View>
 
@@ -54,23 +54,24 @@ const Details: React.FC<any> = ({route}): React.JSX.Element => {
           <Heading>Habilidades</Heading>
 
           <View className="mt-2">
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
+            {pokemonInfo?.abilities?.map(ability => (
+              <TextNative key={ability.ability.name} className="mb-2 text-base">
+                {ability.ability.name}
+              </TextNative>
+            ))}
           </View>
         </View>
 
         <View className="my-5">
           <Heading>Movimientos</Heading>
 
-          <View className="mt-2">
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
-            <TextNative className="mb-2 text-base">habilidad #1</TextNative>
+          <View className="mt-2 flex-row flex-wrap gap-x-2">
+            {pokemonInfo?.moves?.map((move, index: number) => (
+              <TextNative key={move.move.name} className="mb-2 text-base">
+                {move.move.name}
+                {pokemonInfo?.moves?.length - 1 === index ? '.' : ','}
+              </TextNative>
+            ))}
           </View>
         </View>
       </View>

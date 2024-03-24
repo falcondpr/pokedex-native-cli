@@ -36,11 +36,11 @@ const Card: React.FC<CardProps> = ({
   return (
     <TouchableOpacity
       className="flex-row mb-6"
-      onPress={() =>
+      onPress={() => {
         navigation.navigate('Details', {
           pokemonName: pokemon.name,
-        })
-      }>
+        });
+      }}>
       <View className="flex-1">
         <View>
           {pokemonInfo?.abilities?.map(({ability}: Ability) => (

@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import {SvgUri} from 'react-native-svg';
 
 import Text from '../ui/Text';
-import {RootStackParamList} from '../screens/Home';
+// import {RootStackParamList} from '../screens/Home';
 import {IRoute, TabBarProps} from '../interfaces/tabBar';
 
 const TabBar: React.FC<TabBarProps> = ({
@@ -13,8 +13,6 @@ const TabBar: React.FC<TabBarProps> = ({
   return (
     <View className="flex-row justify-center gap-x-20 h-[75px] items-center px-5">
       {state.routes.map((route: IRoute, index: number) => {
-        console.log(route);
-
         const isFocused = state.index === index;
         const label = route.name === 'HomeStack' ? 'Inicio' : 'Buscar';
 
@@ -35,7 +33,7 @@ const TabBar: React.FC<TabBarProps> = ({
           });
 
           if (!isFocused && event !== false) {
-            navigation.navigate(route.name as keyof RootStackParamList);
+            navigation.navigate(route.name as any);
           }
         };
 
