@@ -7,7 +7,7 @@ Este proyecto está desarrollado utilizando React Native y requiere algunos paso
 Para clonar el proyecto en tu máquina local, ejecuta el siguiente comando en tu terminal:
 
 ```bash
-git clone [URL_DEL_PROYECTO]
+git clone https://github.com/fervillalbag/pokedex-native-cli
 ```
 
 ## Variables de entorno
