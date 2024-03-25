@@ -1,79 +1,53 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Instrucciones para Ejecutar el Proyecto React Native
 
-# Getting Started
+Este proyecto está desarrollado utilizando React Native y requiere algunos pasos específicos para su configuración y ejecución. A continuación, se detallan los pasos necesarios para clonar, instalar dependencias, y ejecutar el proyecto en un emulador de Android.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Clonar el Proyecto
 
-## Step 1: Start the Metro Server
-
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
+Para clonar el proyecto en tu máquina local, ejecuta el siguiente comando en tu terminal:
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+git clone [URL_DEL_PROYECTO]
 ```
 
-## Step 2: Start your Application
+## Variables de entorno
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+No es necesario configurar las variables de entorno, ya que se encuentran configuradas directamente dentro del proyecto.
 
-### For Android
+## Instalar Dependencias
+
+Una vez que hayas clonado el repositorio, navega al directorio del proyecto y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+npm install
 ```
 
-### For iOS
+## Configurar un Emulador de Android
+
+Asegúrate de tener configurado y funcionando un emulador de Android en tu máquina. Puedes utilizar Android Studio o cualquier otro emulador de tu elección.
+
+## Ejecutar el Proyecto
+
+Una vez que hayas configurado el emulador de Android y hayas instalado todas las dependencias del proyecto, puedes ejecutarlo utilizando el siguiente comando:
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+npm run start
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Esto iniciará el servidor de desarrollo de React Native.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Iniciar el Proyecto en el Emulador
 
-## Step 3: Modifying your App
+Una vez que el servidor de desarrollo esté en funcionamiento, sigue estos pasos para iniciar el proyecto en el emulador:
 
-Now that you have successfully run the app, let's modify it.
+1. **Abrir el Emulador de Android**: Inicia el emulador de Android que has configurado previamente.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+2. **Iniciar la Aplicación en el Emulador**: En la terminal donde se está ejecutando el servidor de desarrollo de React Native, presiona la tecla `a` para iniciar la aplicación en el emulador de Android.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## ¡Listo para Empezar!
 
-## Congratulations! :tada:
+Una vez completados estos pasos, deberías poder ver la aplicación ejecutándose en el emulador de Android. Ahora puedes comenzar a desarrollar y probar tu aplicación React Native.
 
-You've successfully run and modified your React Native App. :partying_face:
+Si tienes algún problema durante la configuración o ejecución del proyecto, por favor revisa la documentación oficial de React Native o ponte en contacto con el equipo de desarrollo para obtener ayuda adicional.
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+¡Gracias por usar nuestro proyecto! Siéntete libre de contribuir o informar sobre cualquier problema que encuentres.
