@@ -11,8 +11,19 @@ import {ArrowLeftIcon} from 'lucide-react-native';
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
 import {useGetPokemonByNameQuery} from '../features/services';
+import {RouteProp} from '@react-navigation/native';
+import {RootStackParamList} from './Home';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-const Details: React.FC<any> = ({route, navigation}): React.JSX.Element => {
+interface DetailsProps {
+  route: RouteProp<RootStackParamList, 'Details'>;
+  navigation: StackNavigationProp<RootStackParamList, 'Details'>;
+}
+
+const Details: React.FC<DetailsProps> = ({
+  route,
+  navigation,
+}): React.JSX.Element => {
   const {data: pokemonInfo, isLoading: loadingPokemonInfo} =
     useGetPokemonByNameQuery(route.params.pokemonName);
 
