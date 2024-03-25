@@ -4,9 +4,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 import Text from '../ui/Text';
 import Heading from '../ui/Heading';
-import useFetch from '../hooks/useFetch';
 import {RootStackParamList} from '../screens/Home';
-import {Ability, IPokemon, ResumePokemon} from '../interfaces/pokemon';
+import {Ability, ResumePokemon} from '../interfaces/pokemon';
+import {useGetPokemonByNameQuery} from '../features/services';
 
 type CardScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -22,10 +22,8 @@ const Card: React.FC<CardProps> = ({
   navigation,
   pokemon,
 }): React.JSX.Element => {
-  const {data: pokemonInfo, isLoading: loadingPokemon} = useFetch<IPokemon>(
-    `/pokemon/${pokemon.name}`,
-    pokemon.name,
-  );
+  const {data: pokemonInfo, isLoading: loadingPokemon} =
+    useGetPokemonByNameQuery(pokemon.name);
 
   if (loadingPokemon) {
     return (
