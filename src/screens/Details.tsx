@@ -10,14 +10,11 @@ import {ArrowLeftIcon} from 'lucide-react-native';
 
 import Heading from '../ui/Heading';
 import Text from '../ui/Text';
-import useFetch from '../hooks/useFetch';
-import {IPokemon} from '../interfaces/pokemon';
+import {useGetPokemonByNameQuery} from '../features/services';
 
 const Details: React.FC<any> = ({route, navigation}): React.JSX.Element => {
-  const {data: pokemonInfo, isLoading: loadingPokemonInfo} = useFetch<IPokemon>(
-    `/pokemon/${route.params.pokemonName}`,
-    route.pokemonName,
-  );
+  const {data: pokemonInfo, isLoading: loadingPokemonInfo} =
+    useGetPokemonByNameQuery(route.params.pokemonName);
 
   if (loadingPokemonInfo) {
     return (
@@ -32,7 +29,6 @@ const Details: React.FC<any> = ({route, navigation}): React.JSX.Element => {
       <View className="mb-5">
         <TouchableOpacity className="py-3" onPress={() => navigation.goBack()}>
           <ArrowLeftIcon color="#999" size={32} />
-          {/* <Text>Volver</Text> */}
         </TouchableOpacity>
       </View>
 

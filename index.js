@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 
 import App from './src/App';
 import {name as appName} from './app.json';
-import {store} from './src/store';
+import {store} from './src/features';
 
 const ReduxApp = () => (
   <Provider store={store}>

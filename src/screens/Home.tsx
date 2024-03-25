@@ -5,8 +5,7 @@ import {SvgUri} from 'react-native-svg';
 import {Controller, FieldValues, useForm} from 'react-hook-form';
 
 import Card from '../components/Card';
-import useFetch from '../hooks/useFetch';
-import {IPokemonResponse} from '../interfaces/pokemon';
+import {useGetAllPokemonQuery} from '../features/services';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -18,8 +17,7 @@ type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 const Home: React.FC<{navigation: HomeScreenNavigationProp}> = ({
   navigation,
 }): React.JSX.Element => {
-  const {data: pokemons, isLoading: loadingPokemons} =
-    useFetch<IPokemonResponse>('/pokemon');
+  const {data: pokemons, isLoading: loadingPokemons} = useGetAllPokemonQuery();
 
   const {control, watch} = useForm<FieldValues>({
     defaultValues: {
